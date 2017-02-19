@@ -1,15 +1,15 @@
 package hatonekoe
 
 import org.bytedeco.javacpp.opencv_core.*
-import org.bytedeco.javacpp.opencv_imgcodecs.imread
-import org.bytedeco.javacpp.opencv_imgcodecs.imwrite
+import org.bytedeco.javacpp.opencv_imgcodecs.*
 
 class ImageCreator {
-    fun createRedImg() {
+    /** 赤一色の画像を作成 */
+    fun createRedImg(height: Int = 100, width: Int = 200) {
         try {
             println("赤色の画像を出力します")
 
-            val redImage = Mat(100, 200, CV_8UC3, Scalar(0.0, 0.0, 255.0, 0.0))
+            val redImage = Mat(height, width, CV_8UC3, Scalar(0.0, 0.0, 255.0, 0.0))
             imwrite("../redImg.jpg", redImage)
         } catch (e: Exception) {
             println(e)
@@ -18,12 +18,38 @@ class ImageCreator {
 
     fun copyImg() {
         try {
-            val filepath = "../"
+            val filedir = "../"
             val filename = "test.png"
             println(filename + " のコピーをおこないます")
 
-            val originalImage: Mat = imread(filepath + filename)
-            imwrite(filepath + "copied_" + filename, originalImage)
+            val originalImage: Mat = imread(filedir + filename)
+            imwrite(filedir + "copied_" + filename, originalImage)
+
+            convertToJpg(filedir + filename, 40)
+        } catch (e: Exception) {
+            println(e)
+        }
+    }
+
+    /** 指定圧縮率の jpg 画像を作る
+     *
+     * @param originalFilePath : 対象画像の path（拡張子まで含む）
+     * @param jpgQuality : JPG品質（デフォは95）
+     */
+    fun convertToJpg (originalFilePath: String, jpgQuality: Int = 95) {
+        try {
+            val originalImage: Mat = imread(originalFilePath)
+            val dotPosition = originalFilePath.lastIndexOf(".")
+
+            val outputPath: String
+
+            if (dotPosition >= 0) {
+                outputPath = originalFilePath.substring(0, dotPosition) + ".jpg"
+            } else {
+                outputPath = originalFilePath + ".jpg"
+            }
+
+            imwrite(outputPath, originalImage, intArrayOf(CV_IMWRITE_JPEG_QUALITY, jpgQuality))
         } catch (e: Exception) {
             println(e)
         }
