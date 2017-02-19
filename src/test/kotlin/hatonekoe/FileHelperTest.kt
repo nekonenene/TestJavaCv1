@@ -7,8 +7,8 @@ class FileHelperTest {
     private val fileHelper = FileHelper()
 
     @Test
-    fun changeExtentionTest() {
-        assertEquals("test.jpg", fileHelper.changeExtention("test.png", "jpg"))
-        assertEquals("../../test.test.png", fileHelper.changeExtention("../../test.test.jpg", "png"))
+    fun changeExtensionTest() {
+        assertEquals("test.jpg", fileHelper.changeExtension("test.png", "jpg"))
+        assertEquals("../../test.test.png", fileHelper.changeExtension("../../test.test.jpg", "png"))
     }
 }

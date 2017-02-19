@@ -4,6 +4,8 @@ import org.bytedeco.javacpp.opencv_core.*
 import org.bytedeco.javacpp.opencv_imgcodecs.*
 
 class ImageCreator {
+    private val fileHelper = FileHelper()
+
     /** 赤一色の画像を作成 */
     fun createRedImg(height: Int = 100, width: Int = 200) {
         try {
@@ -40,13 +42,7 @@ class ImageCreator {
         try {
             val originalImage: Mat = imread(originalFilePath)
             val dotPosition = originalFilePath.lastIndexOf(".")
-
-            val outputPath: String =
-                if (dotPosition >= 0) {
-                    originalFilePath.substring(0, dotPosition) + ".jpg"
-                } else {
-                    originalFilePath + ".jpg"
-                }
+            val outputPath: String = fileHelper.changeExtension(originalFilePath, "jpg")
 
             imwrite(outputPath, originalImage, intArrayOf(CV_IMWRITE_JPEG_QUALITY, jpgQuality))
         } catch (e: Exception) {
