@@ -4,7 +4,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class FileHelperTest {
-    val fileHelper = FileHelper()
+    private val fileHelper = FileHelper()
 
     @Test
     fun changeExtentionTest() {

@@ -41,13 +41,12 @@ class ImageCreator {
             val originalImage: Mat = imread(originalFilePath)
             val dotPosition = originalFilePath.lastIndexOf(".")
 
-            val outputPath: String
-
-            if (dotPosition >= 0) {
-                outputPath = originalFilePath.substring(0, dotPosition) + ".jpg"
-            } else {
-                outputPath = originalFilePath + ".jpg"
-            }
+            val outputPath: String =
+                if (dotPosition >= 0) {
+                    originalFilePath.substring(0, dotPosition) + ".jpg"
+                } else {
+                    originalFilePath + ".jpg"
+                }
 
             imwrite(outputPath, originalImage, intArrayOf(CV_IMWRITE_JPEG_QUALITY, jpgQuality))
         } catch (e: Exception) {
@@ -55,4 +54,3 @@ class ImageCreator {
         }
     }
 }
-
