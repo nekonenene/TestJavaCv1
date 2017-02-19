@@ -29,3 +29,9 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = "3.3"
 }
+
+test {
+    testLogging {
+        exceptionFormat = "full" // fail時に詳細を表示
+    }
+}
