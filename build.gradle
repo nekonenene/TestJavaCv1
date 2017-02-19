@@ -33,7 +33,7 @@ test {
 }
 
 /* jar ファイルを /build/libs 下に作成 */
-task jar(type: Jar, dependsOn: jar) {
+task createJar(type: Jar, dependsOn: jar) {
     archiveName = "output.jar"
     manifest {
         attributes "Main-Class" : mainClassName
