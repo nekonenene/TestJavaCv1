@@ -32,6 +32,18 @@ test {
     }
 }
 
+/* jar ファイルの作成 */
+task jar(type: Jar, dependsOn: jar) {
+    archiveName = "output.jar"
+    manifest {
+        attributes "Main-Class" : mainClassName
+    }
+
+    from configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}
+    from "$buildDir/classes/main"
+    from "$buildDir/resources/main"
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = "3.3"
 }
