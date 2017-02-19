@@ -1,6 +1,7 @@
 package hatonekoe
 
 import org.bytedeco.javacpp.opencv_core.*
+import org.bytedeco.javacpp.opencv_imgcodecs.imread
 import org.bytedeco.javacpp.opencv_imgcodecs.imwrite
 
 class ImageCreator {
@@ -14,9 +15,18 @@ class ImageCreator {
             println(e)
         }
     }
+
+    fun copyImg() {
+        try {
+            val filepath = "../"
+            val filename = "test.png"
+            println(filename + " のコピーをおこないます")
+
+            val originalImage: Mat = imread(filepath + filename)
+            imwrite(filepath + "copied_" + filename, originalImage)
+        } catch (e: Exception) {
+            println(e)
+        }
+    }
 }
 
-fun main(args: Array<String>) {
-    val creator = ImageCreator()
-    creator.createRedImg()
-}
