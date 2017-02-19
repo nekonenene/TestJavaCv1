@@ -41,7 +41,6 @@ class ImageCreator {
     fun convertToJpg (originalFilePath: String, jpgQuality: Int = 95) {
         try {
             val originalImage: Mat = imread(originalFilePath)
-            val dotPosition = originalFilePath.lastIndexOf(".")
             val outputPath: String = fileHelper.changeExtension(originalFilePath, "jpg")
 
             imwrite(outputPath, originalImage, intArrayOf(CV_IMWRITE_JPEG_QUALITY, jpgQuality))
