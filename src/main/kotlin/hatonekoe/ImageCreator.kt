@@ -75,7 +75,7 @@ class ImageCreator {
             recorder.videoBitrate = movie.videoBitrate
             // recorder.videoCodec = AV_CODEC_ID_H264
             recorder.audioCodec = AV_CODEC_ID_AAC
-            recorder.audioChannels = 2 // ステレオ録音、指定がないと audioChannels = 0 で録音しようとする
+            recorder.audioChannels = movie.audioChannels // ステレオ録音は 2、指定がないと audioChannels = 0 で録音しようとする
             recorder.start()
 
             val maxFrames = 1000
