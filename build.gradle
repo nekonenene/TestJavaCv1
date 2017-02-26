@@ -2,6 +2,9 @@ defaultTasks "run" // gradle とコマンドすると gradle run になる
 
 buildscript {
     ext.kotlin_version = "1.0.6"
+    ext.gradle_version = "3.3"
+    ext.junit_version  = "4.12"
+
     repositories {
         mavenCentral()
     }
@@ -23,7 +26,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile group: "org.bytedeco", name: "javacv-platform", version: "1.3.1"
     testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
-    testCompile "junit:junit:4.12"
+    testCompile "junit:junit:$junit_version"
 }
 
 test {
@@ -45,5 +48,5 @@ task createJar(type: Jar, dependsOn: jar) {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "3.3"
+    gradleVersion = "$gradle_version"
 }
